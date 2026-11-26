@@ -55,10 +55,18 @@ bool cargarPalabra(vector <string>& palabras){
 }
 
 //funcion para buscar la palabra en la sopa de letra
-//la sopa de letras que tenemos sin que la modifique solo la lea y tranaje con la original
-//                                         recibe la palabra que ingreso el usuario, q buscamos en la sopa de letras
-//                                                                                               letra de la palabra toca comparar ahora
-bool buscarDireccion(const vector <string>& sopaLetraTemporal, const vector<string> palabraTemporal, int fila, int columna, int posicionLetra) {
-    if (fila<0 || fila>=palabraTemporal.size() || columna<0 || columna>=0){
+//la sopa de letras que tenemos sin que la modifique solo la lea y trabaje con la original
+//                                                   recibe la palabra que ingreso el usuario, q buscamos en la sopa de letras
+//                                                                                                                          letra de la palabra toca comparar ahora
+bool buscarDireccion(const vector <string>& sopaLetra, const string palabra, int fila, int columna, int mueveFila, int mueveCol, int posicionPalabra) {
+    if (posicionPalabra == palabra.size()) {
+        return true;
     }
-}
+    if (fila<0 || fila>=sopaLetra.size() || columna<0 || columna>=sopaLetra[fila].size()){
+        return false;
+    }
+    if (tolower(sopaLetra[fila][columna] ) != palabra[posicionPalabra]) {
+        return false;
+    }
+    return buscarDireccion(sopaLetra, palabra, fila +mueveFila, columna+mueveCol, mueveFila, mueveCol, posicionPalabra+1);
+}   
