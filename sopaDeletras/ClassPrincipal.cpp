@@ -71,6 +71,27 @@ bool buscarDireccion(const vector <string>& sopaLetra, const string palabra, int
     return buscarDireccion(sopaLetra, palabra, fila +mueveFila, columna+mueveCol, mueveFila, mueveCol, posicionPalabra+1);
 }
 
+bool buscarPalabra(const vector<string>& sopa, const string& palabra,
+                   int& filaOk, int& colOk, int& dFilaOk, int& dColOk) {
+    int dF[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+    int dC[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+
+     for (int f = 0; f < sopa.size(); f++) {
+         for (int c = 0; c < sopa[f].size(); c++) {
+             for (int d = 0; d < 8; d++) {
+                 if (buscarDireccion(sopa, palabra, f, c, dF[d], dC[d], 0)) {
+                     filaOk = f;
+                     colOk = c;
+                     dFilaOk = dF[d];
+                     dColOk = dC[d];
+                     return true;
+                 }
+             }
+         }
+     }
+    return false;
+}
+
 
 int main() {
     vector <string> sopaLetra;
@@ -84,7 +105,7 @@ int main() {
     do {
         cout<<"--SOPA DE LETRAS--"<<endl;
         cout<<"  tema(Animales)"<<endl;
-        cout<<"1. Adivinar palabra"<<endl;
+        cout<<"1. Buscar palabra"<<endl;
         cout<<"2. Ver encontradas y faltantes"<<endl;
         cout<<"3. Resolver toda la sopa de letras"<<endl;
         cout<<"4. Salir del programa"<<endl;
