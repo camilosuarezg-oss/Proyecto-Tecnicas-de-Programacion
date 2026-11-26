@@ -69,4 +69,40 @@ bool buscarDireccion(const vector <string>& sopaLetra, const string palabra, int
         return false;
     }
     return buscarDireccion(sopaLetra, palabra, fila +mueveFila, columna+mueveCol, mueveFila, mueveCol, posicionPalabra+1);
-}   
+}
+
+
+int main() {
+    vector <string> sopaLetra;
+    vector <string> palabras;
+
+    if (!cargarSopa(sopaLetra) || !cargarPalabra(palabras)) {
+        return 1;
+    }
+
+    int opcion;
+    do {
+        cout<<"--SOPA DE LETRAS--"<<endl;
+        cout<<"  tema(Animales)"<<endl;
+        cout<<"1. Adivinar palabra"<<endl;
+        cout<<"2. Ver encontradas y faltantes"<<endl;
+        cout<<"3. Resolver toda la sopa de letras"<<endl;
+        cout<<"4. Salir del programa"<<endl;
+        cout<<"Opcion: ";
+        cin>>opcion;
+
+        if (opcion==1) {
+            string palabraIngresada;
+            cout<<"Ingrese una palabra: ";
+            cin>>palabraIngresada;
+            palabraIngresada=minuscula(palabraIngresada);
+
+        int indice=-1;
+        for (int i=0; i<palabras.size(); i++) {
+            if (palabras[i]==palabraIngresada) {
+                indice=i;
+            }
+        }
+}
+    }while (opcion<4 && opcion>1);
+}
